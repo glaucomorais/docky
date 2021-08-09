@@ -2,7 +2,7 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                         #
-#  Docky v1.0                                                             #
+#  Docky v1.1                                                             #
 #                                                                         #
 #  Script to facilitate the use of Docker based on Laravel Sail script.   #
 #                                                                         #
@@ -31,6 +31,14 @@
 #  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE       #
 #  SOFTWARE.                                                              #
 #                                                                         #
+#  Changelog:                                                             #
+#                                                                         #
+#    - v1.1:                                                              #
+#      + Changed node:lts-alpine to node:lts                              #
+#                                                                         #
+#    - v1.0:                                                              #
+#      + Initial release                                                  #
+#                                                                         #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 WHITE='\033[1;37m'
@@ -51,7 +59,7 @@ function proxyDockerCommand {
 }
 
 function proxyNodeCommands {
-    proxyDockerCommand -ti node:lts-alpine "$@"
+    proxyDockerCommand -ti node:lts "$@"
 }
 
 if [ $# -gt 0 ]; then
