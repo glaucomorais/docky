@@ -2,7 +2,7 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                         #
-#  Docky v1.2.1                                                           #
+#  Docky v1.2.2                                                           #
 #                                                                         #
 #  Script to facilitate the use of Docker based on Laravel Sail script.   #
 #                                                                         #
@@ -33,6 +33,10 @@
 #                                                                         #
 #  Changelog:                                                             #
 #                                                                         #
+#    - v1.2.2:                                                            #
+#      - Add some documentation                                           #
+#      - Fix "docker: invalid reference format." error                    #
+#                                                                         #
 #    - v1.2.1:                                                            #
 #      + Add COMPOSER_IMAGE environment var support                       #
 #                                                                         #
@@ -58,10 +62,11 @@ fi
 
 if [[ -f .docky.env ]]; then
     source .docky.env
-    COMPOSER_IMAGE="${COMPOSER_IMAGE:-composer:latest}"
-    NODE_IMAGE="${NODE_IMAGE:-node:lts}"
-    PHP_IMAGE="${PHP_IMAGE:-php:alpine}"
 fi
+
+COMPOSER_IMAGE="${COMPOSER_IMAGE:-composer:latest}"
+NODE_IMAGE="${NODE_IMAGE:-node:lts}"
+PHP_IMAGE="${PHP_IMAGE:-php:alpine}"
 
 function proxyDockerCommand {
     docker run --rm \
