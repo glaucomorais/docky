@@ -2,7 +2,7 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                         #
-#  Docky v1.1                                                             #
+#  Docky v1.2                                                             #
 #                                                                         #
 #  Script to facilitate the use of Docker based on Laravel Sail script.   #
 #                                                                         #
@@ -33,6 +33,9 @@
 #                                                                         #
 #  Changelog:                                                             #
 #                                                                         #
+#    - v1.2:                                                              #
+#      + Add .docky.env support                                           #
+#                                                                         #
 #    - v1.1:                                                              #
 #      + Changed node:lts-alpine to node:lts                              #
 #                                                                         #
@@ -50,6 +53,12 @@ if ! docker info > /dev/null 2>&1; then
     exit 1
 fi
 
+if [[ -f .docky.env ]]; then
+    source .docky.env
+    PHP_IMAGE="${PHP_IMAGE:-php:alpine}"
+    NODE_IMAGE="${NODE_IMAGE:-node:lts}"
+fi
+
 function proxyDockerCommand {
     docker run --rm \
         -u "$(id -u):$(id -g)" \
@@ -58,8 +67,12 @@ function proxyDockerCommand {
         "$@"
 }
 
+function proxyPhpCommands {
+    proxyDockerCommand "$PHP_IMAGE" $@
+}
+
 function proxyNodeCommands {
-    proxyDockerCommand -ti node:lts "$@"
+    proxyDockerCommand -ti "$NODE_IMAGE" $@
 }
 
 if [ $# -gt 0 ]; then
@@ -75,12 +88,12 @@ if [ $# -gt 0 ]; then
         proxyNodeCommands $@
 
     elif [ "$1" == "php" ]; then
-        proxyDockerCommand php:alpine $@
+        proxyPhpCommands $@
 
     elif [ "$1" == "phpcs" ]; then
         shift 1
 
-        proxyDockerCommand php:alpine \
+        proxyPhpCommands \
             vendor/bin/phpcs \
             --report-full \
             --standard=phpcs.ruleset.xml \
@@ -92,7 +105,7 @@ if [ $# -gt 0 ]; then
 
         shift 2
 
-        proxyDockerCommand php:alpine \
+        proxyPhpCommands \
             vendor/bin/phpmd \
             "$SRCPATH" \
             text \
