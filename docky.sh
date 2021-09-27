@@ -2,7 +2,7 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                         #
-#  Docky v1.2                                                             #
+#  Docky v1.2.1                                                           #
 #                                                                         #
 #  Script to facilitate the use of Docker based on Laravel Sail script.   #
 #                                                                         #
@@ -33,6 +33,9 @@
 #                                                                         #
 #  Changelog:                                                             #
 #                                                                         #
+#    - v1.2.1:                                                            #
+#      + Add COMPOSER_IMAGE environment var support                       #
+#                                                                         #
 #    - v1.2:                                                              #
 #      + Add .docky.env support                                           #
 #                                                                         #
@@ -55,8 +58,9 @@ fi
 
 if [[ -f .docky.env ]]; then
     source .docky.env
-    PHP_IMAGE="${PHP_IMAGE:-php:alpine}"
+    COMPOSER_IMAGE="${COMPOSER_IMAGE:-composer:latest}"
     NODE_IMAGE="${NODE_IMAGE:-node:lts}"
+    PHP_IMAGE="${PHP_IMAGE:-php:alpine}"
 fi
 
 function proxyDockerCommand {
@@ -77,7 +81,7 @@ function proxyNodeCommands {
 
 if [ $# -gt 0 ]; then
     if [ "$1" == "composer" ]; then
-        proxyDockerCommand composer:latest $@
+        proxyDockerCommand "$COMPOSER_IMAGE" $@
 
     elif [ "$1" == "eslint" ]; then
         shift 1
