@@ -11,14 +11,16 @@ See the `.docky.env.example` file.
 
 ## Changelog
 
-- v1.2.2:
+- **v1.3**:
+  - Add _PHPUnit_ support
+- **v1.2.2**:
   - Add some documentation
-  - Fix "docker: invalid reference format." error
-- v1.2.1:
-  - Add COMPOSER_IMAGE environment var support
-- v1.2:
-  - Add .docky.env support
-- v1.1:
-  - Changed node:lts-alpine to node:lts
-- v1.0:
+  - Fix _`"docker: invalid reference format."`_ error
+- **v1.2.1**:
+  - Add `COMPOSER_IMAGE` environment var support
+- **v1.2**:
+  - Add `.docky.env` support
+- **v1.1**:
+  - Changed `node:lts-alpine` to `node:lts`
+- **v1.0**:
   - Initial release

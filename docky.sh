@@ -2,7 +2,7 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                         #
-#  Docky v1.2.2                                                           #
+#  Docky v1.3                                                             #
 #                                                                         #
 #  Script to facilitate the use of Docker based on Laravel Sail script.   #
 #                                                                         #
@@ -32,6 +32,9 @@
 #  SOFTWARE.                                                              #
 #                                                                         #
 #  Changelog:                                                             #
+#                                                                         #
+#    - v1.3:                                                              #
+#      - Add PHPUnit support                                              #
 #                                                                         #
 #    - v1.2.2:                                                            #
 #      - Add some documentation                                           #
@@ -120,6 +123,12 @@ if [ $# -gt 0 ]; then
             text \
             phpmd.ruleset.xml \
             $@
+
+    elif [ "$1" == "phpunit" ]; then
+        shift 1
+
+        proxyPhpCommands \
+            vendor/bin/phpunit $@
 
     else
         echo -e "${WHITE}Unknown or unsupported command.${NC}" >&2
