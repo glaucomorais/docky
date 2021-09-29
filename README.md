@@ -9,8 +9,19 @@ By default it'll use the latest image tag, but you can control the images using
 a `.docky.env` file.  
 See the `.docky.env.example` file.
 
+You can add an extra volume when running Composer by adding
+`COMPOSER_EXTRA_VOLUME` variable to `.docky.env`.
+
+Example:
+
+```dotenv
+COMPOSER_EXTRA_VOLUME="/path/in/host:/path/in/container"
+```
+
 ## Changelog
 
+- **v1.4**:
+  - Add support for an extra volume when running Composer
 - **v1.3**:
   - Add _PHPUnit_ support
 - **v1.2.2**:

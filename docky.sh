@@ -2,7 +2,7 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                         #
-#  Docky v1.3                                                             #
+#  Docky v1.4                                                             #
 #                                                                         #
 #  Script to facilitate the use of Docker based on Laravel Sail script.   #
 #                                                                         #
@@ -32,6 +32,9 @@
 #  SOFTWARE.                                                              #
 #                                                                         #
 #  Changelog:                                                             #
+#                                                                         #
+#    - v1.4:                                                              #
+#      - Add support for an extra volume when running Composer            #
 #                                                                         #
 #    - v1.3:                                                              #
 #      - Add PHPUnit support                                              #
@@ -76,7 +79,7 @@ function proxyDockerCommand {
         -u "$(id -u):$(id -g)" \
         -v "$(pwd):/opt" \
         -w /opt \
-        "$@"
+        $@
 }
 
 function proxyPhpCommands {
@@ -89,7 +92,11 @@ function proxyNodeCommands {
 
 if [ $# -gt 0 ]; then
     if [ "$1" == "composer" ]; then
-        proxyDockerCommand "$COMPOSER_IMAGE" $@
+        if [[ ! -z "$COMPOSER_EXTRA_VOLUME" ]]; then
+            proxyDockerCommand -v "${COMPOSER_EXTRA_VOLUME}" $COMPOSER_IMAGE $@
+        else
+            proxyDockerCommand $COMPOSER_IMAGE $@
+        fi
 
     elif [ "$1" == "eslint" ]; then
         shift 1
