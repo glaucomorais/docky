@@ -21,16 +21,16 @@ COMPOSER_EXTRA_VOLUME="/path/in/host:/path/in/container"
 ## Changelog
 
 - **v1.4**:
-  - Add support for an extra volume when running Composer
+  - Adds support for an extra volume when running Composer
 - **v1.3**:
-  - Add _PHPUnit_ support
+  - Adds _PHPUnit_ support
 - **v1.2.2**:
-  - Add some documentation
+  - Adds documentation
   - Fix _`"docker: invalid reference format."`_ error
 - **v1.2.1**:
-  - Add `COMPOSER_IMAGE` environment var support
+  - Adds `COMPOSER_IMAGE` environment var support
 - **v1.2**:
-  - Add `.docky.env` support
+  - Adds `.docky.env` support
 - **v1.1**:
   - Changed `node:lts-alpine` to `node:lts`
 - **v1.0**:

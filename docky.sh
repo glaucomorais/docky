@@ -31,30 +31,6 @@
 #  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE       #
 #  SOFTWARE.                                                              #
 #                                                                         #
-#  Changelog:                                                             #
-#                                                                         #
-#    - v1.4:                                                              #
-#      - Add support for an extra volume when running Composer            #
-#                                                                         #
-#    - v1.3:                                                              #
-#      - Add PHPUnit support                                              #
-#                                                                         #
-#    - v1.2.2:                                                            #
-#      - Add some documentation                                           #
-#      - Fix "docker: invalid reference format." error                    #
-#                                                                         #
-#    - v1.2.1:                                                            #
-#      + Add COMPOSER_IMAGE environment var support                       #
-#                                                                         #
-#    - v1.2:                                                              #
-#      + Add .docky.env support                                           #
-#                                                                         #
-#    - v1.1:                                                              #
-#      + Changed node:lts-alpine to node:lts                              #
-#                                                                         #
-#    - v1.0:                                                              #
-#      + Initial release                                                  #
-#                                                                         #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 WHITE='\033[1;37m'
