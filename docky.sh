@@ -2,7 +2,7 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                         #
-#  Docky v1.5                                                             #
+#  Docky v1.6                                                             #
 #                                                                         #
 #  Script to facilitate the use of Docker based on Laravel Sail script.   #
 #                                                                         #
@@ -50,6 +50,18 @@ COMPOSER_IMAGE="${COMPOSER_IMAGE:-composer:latest}"
 NODE_IMAGE="${NODE_IMAGE:-node:lts}"
 PHP_IMAGE="${PHP_IMAGE:-php:alpine}"
 
+function extractPorts {
+    OLD_IFS="$IFS"
+    IFS=","
+    PORTS=""
+    
+    for PORT in $@; do
+        PORTS+="-p ${PORT} "
+    done
+    
+    IFS="$OLD_IFS"
+}
+
 function proxyDockerCommand {
     docker run --rm \
         -u "$(id -u):$(id -g)" \
@@ -59,11 +71,21 @@ function proxyDockerCommand {
 }
 
 function proxyPhpCommands {
-    proxyDockerCommand "$PHP_IMAGE" $@
+    if [[ ! -z "$PHP_PORTS" ]]; then
+        extractPorts $PHP_PORTS
+        proxyDockerCommand $PORTS $PHP_IMAGE $@
+    else
+        proxyDockerCommand $PHP_IMAGE $@
+    fi
 }
 
 function proxyNodeCommands {
-    proxyDockerCommand -ti "$NODE_IMAGE" $@
+    if [[ ! -z "$NODE_PORTS" ]]; then
+        extractPorts $NODE_PORTS
+        proxyDockerCommand  -ti $PORTS $NODE_IMAGE $@
+    else
+        proxyDockerCommand -ti $NODE_IMAGE $@
+    fi
 }
 
 if [ $# -gt 0 ]; then

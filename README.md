@@ -18,22 +18,34 @@ Example:
 COMPOSER_EXTRA_VOLUME="/path/in/host:/path/in/container"
 ```
 
+You can add port forwarding using `PHP_PORTS` and `NODE_PORTS`:
+
+```dotenv
+PHP_PORTS="80:80,8081:8081"
+NODE_PORTS="3000:3000,5000:5000"
+```
+
+The entries will be converted to the Docker `run` command `-p` flag
+automatically.
+
 ## Changelog
 
-- **v1.5**:
+- **v1.6:**
+  - Adds support for port fowarding
+- **v1.5:**
   - Adds support for testbench (ochestra/testbench)
-- **v1.4**:
+- **v1.4:**
   - Adds support for an extra volume when running Composer
-- **v1.3**:
+- **v1.3:**
   - Adds _PHPUnit_ support
-- **v1.2.2**:
+- **v1.2.2:**
   - Adds documentation
   - Fix _`"docker: invalid reference format."`_ error
-- **v1.2.1**:
+- **v1.2.1:**
   - Adds `COMPOSER_IMAGE` environment var support
-- **v1.2**:
+- **v1.2:**
   - Adds `.docky.env` support
-- **v1.1**:
+- **v1.1:**
   - Changed `node:lts-alpine` to `node:lts`
-- **v1.0**:
+- **v1.0:**
   - Initial release
