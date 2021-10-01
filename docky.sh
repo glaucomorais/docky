@@ -2,7 +2,7 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                         #
-#  Docky v1.4                                                             #
+#  Docky v1.5                                                             #
 #                                                                         #
 #  Script to facilitate the use of Docker based on Laravel Sail script.   #
 #                                                                         #
@@ -112,6 +112,12 @@ if [ $# -gt 0 ]; then
 
         proxyPhpCommands \
             vendor/bin/phpunit $@
+
+    elif [ "$1" == "testbench" ]; then
+        shift 1
+
+        proxyPhpCommands \
+            vendor/bin/testbench $@
 
     else
         echo -e "${WHITE}Unknown or unsupported command.${NC}" >&2

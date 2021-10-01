@@ -20,6 +20,8 @@ COMPOSER_EXTRA_VOLUME="/path/in/host:/path/in/container"
 
 ## Changelog
 
+- **v1.5**:
+  - Adds support for testbench (ochestra/testbench)
 - **v1.4**:
   - Adds support for an extra volume when running Composer
 - **v1.3**:
