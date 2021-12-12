@@ -2,7 +2,7 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                         #
-#  Docky v1.6                                                             #
+#  Docky v1.7                                                             #
 #                                                                         #
 #  Script to facilitate the use of Docker based on Laravel Sail script.   #
 #                                                                         #
@@ -140,6 +140,21 @@ if [ $# -gt 0 ]; then
 
         proxyPhpCommands \
             vendor/bin/testbench $@
+
+    elif [ "$1" == "wp" ]; then
+        shift 1
+
+        execute_command wp "$@"
+
+    elif [ "$1" == "wpupdate" ]; then
+        shift 1
+
+        execute_command wp core update
+        execute_command wp theme update --all
+        execute_command wp plugin update --all
+        execute_command wp language core update
+        execute_command wp language theme update --all
+        execute_command wp language plugin update --all
 
     else
         echo -e "${WHITE}Unknown or unsupported command.${NC}" >&2

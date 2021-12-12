@@ -30,6 +30,8 @@ automatically.
 
 ## Changelog
 
+- **v1.7:**
+  - Adds support for WP CLI and adds `wpupdate` routine
 - **v1.6:**
   - Adds support for port fowarding
 - **v1.5:**
